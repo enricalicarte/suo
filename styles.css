@@ -39,3 +39,56 @@ html {
     align-items: flex-end;
     padding: 1.5rem;
 }
+.article-content h2 {
+            font-size: 1.875rem;
+            font-weight: 300;
+            color: #3D3D3D;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #3D3D3D;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: #4B5563;
+        }
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .article-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+            color: #4B5563;
+        }
+        .article-content strong {
+            color: #3D3D3D;
+            font-weight: 600;
+        }
+        .quote-box {
+            border-left: 4px solid #8B9A7A;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #6B7280;
+        }
+        .info-box {
+            background-color: #F3F4F6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .warning-box {
+            background-color: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
