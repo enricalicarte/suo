@@ -1,0 +1,29 @@
+<header class="bg-white shadow-sm">
+  <nav class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+    <a href="index.html" class="text-2xl font-light tracking-[2px] text-[#3D3D3D]">SÛO</a>
+    <ul class="hidden md:flex items-center space-x-10">
+      <li><a href="#categorias" class="nav-link">Calzado</a></li>
+      <li><a href="#barefoot" class="nav-link">Barefoot</a></li>
+      <li><a href="quienes-somos.html" class="nav-link">Quienes somos</a></li>
+      <li><a href="blog.html" class="nav-link">Blog</a></li>
+      <li><a href="#tienda" class="nav-link">Tienda</a></li>
+    </ul>
+    <div class="md:hidden">
+      <button id="menuBtn" class="space-y-1.5 z-50 relative" aria-label="Toggle menu">
+        <span id="bar1" class="block w-6 h-0.5 bg-[#3D3D3D] transition-transform duration-300"></span>
+        <span id="bar2" class="block w-6 h-0.5 bg-[#3D3D3D] transition-opacity duration-300"></span>
+        <span id="bar3" class="block w-6 h-0.5 bg-[#3D3D3D] transition-transform duration-300"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobileMenu" class="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-white/95 backdrop-blur-lg md:hidden transition-opacity duration-300 opacity-0 pointer-events-none">
+    <ul class="flex flex-col items-center justify-center h-full space-y-8">
+      <li><a href="#categorias" class="mobile-link">Calzado</a></li>
+      <li><a href="#barefoot" class="mobile-link">Barefoot</a></li>
+      <li><a href="quienes-somos.html" class="mobile-link">Quienes somos</a></li>
+      <li><a href="blog.html" class="mobile-link">Blog</a></li>
+      <li><a href="#tienda" class="mobile-link">Tienda</a></li>
+    </ul>
+  </div>
+</header>
