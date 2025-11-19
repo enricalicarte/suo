@@ -1,5 +1,5 @@
-//AVATAR
-<script>(function() {
+//AVATAR - Se ejecuta inmediatamente
+(function() {
   var iframe = document.createElement('iframe');
   var baseUrl = 'https://copy-of-video-avatar-configurator-622291485897.us-west1.run.app/?mode=embedded';
   iframe.src = baseUrl;
@@ -12,9 +12,13 @@
 
   // 2. Helper to extract page context (Reading the website)
   function getPageContent() {
-    // Simple scraper: gets visible text from body, cleans up whitespace, limits length
-    var text = document.body.innerText || "";
-    return text.replace(/\s+/g, ' ').substring(0, 15000); // Limit to ~15k chars for context window
+    try {
+      var text = document.body.innerText || document.body.textContent || "";
+      return text.replace(/\s+/g, ' ').trim().substring(0, 15000);
+    } catch (e) {
+      console.warn('Avatar: No se pudo extraer contenido de la página:', e);
+      return "";
+    }
   }
 
   // 3. Initialize Iframe
@@ -68,7 +72,7 @@
   });
 
   document.body.appendChild(iframe);
-})();</script>
+})();
 
 // --- Cargar header y footer dinámicamente ---
 function loadFragment(id, file) {
@@ -79,21 +83,6 @@ function loadFragment(id, file) {
     })
     .catch(err => console.error(`Error al cargar ${file}:`, err));
 }
-
-// --- Iniciar cuando la página esté lista ---
-document.addEventListener("DOMContentLoaded", async () => {
-  // Espera a que se carguen header y footer antes de ejecutar el resto
-  await Promise.all([
-    loadFragment("header", "header.html"),
-    loadFragment("footer", "footer.html")
-  ]);
-
-  // Cuando todo está cargado, inicializa los scripts
-  initMenu();
-  initFAQ();
-  initNewsletter();
-});
-
 
 // --- 1️⃣ Menú móvil ---
 function initMenu() {
@@ -123,7 +112,6 @@ function initMenu() {
   });
 }
 
-
 // --- 2️⃣ Acordeón de FAQ ---
 function initFAQ() {
   const faqQuestions = document.querySelectorAll(".faq-question");
@@ -140,7 +128,6 @@ function initFAQ() {
   });
 }
 
-
 // --- 3️⃣ Formulario de newsletter ---
 function initNewsletter() {
   const form = document.getElementById("newsletterForm");
@@ -154,3 +141,25 @@ function initNewsletter() {
   });
 }
 
+// --- Función de inicialización ---
+async function initAll() {
+  // Espera a que se carguen header y footer antes de ejecutar el resto
+  await Promise.all([
+    loadFragment("header", "header.html"),
+    loadFragment("footer", "footer.html")
+  ]);
+
+  // Cuando todo está cargado, inicializa los scripts
+  initMenu();
+  initFAQ();
+  initNewsletter();
+}
+
+// --- Iniciar cuando la página esté lista ---
+// Como el script se carga con defer, verificamos si el DOM ya está listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAll);
+} else {
+  // El DOM ya está listo, ejecuta directamente
+  initAll();
+}
