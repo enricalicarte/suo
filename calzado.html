@@ -224,6 +224,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/script.js" defer></script>
     
     <script>
       tailwind.config = {
@@ -242,19 +244,10 @@
     </script>
     <style>.no-export { display: none !important; }</style>
 </head>
-<body class="antialiased" style="background-color: #FFFFFF;">
-    <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm"><nav class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center"><a class="text-2xl font-light tracking-[3px] text-suo-dark hover:opacity-70 transition-opacity" href="https://suobarefoot.es/index.html">SÛO</a><ul class="hidden md:flex items-center space-x-10"><li><a class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors" href="https://suobarefoot.es/calzado.html">Calzado</a></li><li><a href="#barefoot" class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors cursor-pointer">Barefoot</a></li><li><a class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors" href="#/quienes-somos">Quienes somos</a></li><li><a class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors" href="#/blog">Blog</a></li><li><a class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors" href="#/tienda">Tienda</a></li></ul><div class="md:hidden z-50"><button class="space-y-1.5 focus:outline-none" aria-label="Toggle menu"><span class="block w-6 h-0.5 bg-suo-dark transition-transform duration-300 "></span><span class="block w-6 h-0.5 bg-suo-dark transition-opacity duration-300 "></span><span class="block w-6 h-0.5 bg-suo-dark transition-transform duration-300 "></span></button></div></nav><div class="fixed top-0 left-0 w-full h-screen bg-white transition-transform duration-300 ease-in-out transform -translate-y-full md:hidden pt-24 flex flex-col items-center z-40"><ul class="flex flex-col items-center space-y-8"><li><a class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors" href="https://suobarefoot.es/calzado.html">Calzado</a></li><li><a href="#barefoot" class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors">Barefoot</a></li><li><a class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors" href="#/quienes-somos">Quienes somos</a></li><li><a class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors" href="#/blog">Blog</a></li><li><a class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors" href="#/tienda">Tienda</a></li></ul></div></header>
+<body class="antialiased" style="background-color: #F7F5F2;">
+    <div id="header"></div>
     <main>
-
-<section class="bg-suo-bg py-12 border-b border-gray-100 relative"><button class="no-export absolute top-6 right-6 bg-white hover:bg-gray-100 text-gray-600 px-4 py-2 text-xs uppercase tracking-widest rounded transition-all border border-gray-200">Exportar Catálogo</button>
-<div class="max-w-6xl mx-auto px-6 text-center">
-<h1 class="text-4xl font-light text-suo-dark mb-2 tracking-wide">Colección SÛO</h1>
-
-<p class="text-gray-600 font-light">Calzado respetuoso para caminar como la naturaleza manda.</p>
-</div>
-</section>
-
-<div id="products-content" class="max-w-6xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12"><button class="lg:hidden w-full py-3 bg-suo-dark text-white uppercase tracking-widest text-xs rounded no-export">Filtrar Productos</button><aside class="lg:w-64 flex-shrink-0 hidden lg:block">
+<button class="lg:hidden w-full py-3 bg-suo-dark text-white uppercase tracking-widest text-xs rounded no-export">Filtrar Productos</button><aside class="lg:w-64 flex-shrink-0 hidden lg:block">
 <div class="sticky top-24 space-y-8">
 <div>
 <h3 class="text-xs font-bold text-suo-dark uppercase tracking-wider mb-4">Buscar</h3>
@@ -554,9 +547,8 @@
 </div>
 </a></div>
 </div>
-</div>
 
     </main>
-    <footer id="site-footer" class="bg-white py-12 border-t border-gray-100"><div class="max-w-6xl mx-auto px-6"><div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8"><div><h3 class="text-lg font-light tracking-[2px] text-suo-dark mb-4">SÛO</h3><p class="text-sm text-gray-600 leading-relaxed">Tienda especializada en calzado barefoot en Barcelona.</p></div><div><h4 class="text-xs font-bold text-suo-dark mb-4 uppercase tracking-wider">Tienda</h4><ul class="space-y-2 text-sm text-gray-600"><li><a class="hover:text-suo-green transition-colors" href="https://suobarefoot.es/calzado.html">Niño</a></li><li><a class="hover:text-suo-green transition-colors" href="https://suobarefoot.es/calzado.html">Niña</a></li><li><a class="hover:text-suo-green transition-colors" href="https://suobarefoot.es/calzado.html">Mujer</a></li></ul></div><div><h4 class="text-xs font-bold text-suo-dark mb-4 uppercase tracking-wider">Información</h4><ul class="space-y-2 text-sm text-gray-600"><li><a class="hover:text-suo-green transition-colors" href="#/quienes-somos">Sobre Nosotros</a></li><li><a class="hover:text-suo-green transition-colors" href="#/blog">Blog</a></li><li><a class="hover:text-suo-green transition-colors" href="#/tienda">Contacto</a></li></ul></div><div><h4 class="text-xs font-bold text-suo-dark mb-4 uppercase tracking-wider">Contacto</h4><ul class="space-y-2 text-sm text-gray-600 leading-relaxed"><li>Carrer de Manso, 43</li><li>Sant Antoni, 08015 Barcelona</li><li><a href="mailto:hola@suobarefoot.com" class="hover:text-suo-green">hola@suobarefoot.com</a></li></ul></div></div><div class="border-t border-gray-100 pt-8 text-center text-xs text-gray-400 tracking-wide"><p>© 2025 SÛO Barcelona. Todos los derechos reservados.</p></div></div></footer>
+    <div id="footer"></div>
 </body>
 </html>
