@@ -1,52 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SÛO Header</title>
-    <meta name="description" content="Header component export">
-    <link rel="canonical" href="https://suobarefoot.es/index.html">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="SÛO Header">
-    <meta property="og:description" content="Header component export">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1516961642278-5d95892393ae?q=80&w=1200">
 
-    <!-- JSON-LD -->
-    <script type="application/ld+json">
-    {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "SÛO Barcelona",
-  "url": "https://suobarefoot.es/index.html",
-  "logo": "https://cdn-icons-png.flaticon.com/512/2749/2749676.png",
-  "description": "Header component export"
-}
-    </script>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
-    
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              suo: { dark: '#3D3D3D', green: '#8B9A7A', greenDark: '#6d7a5e', bg: '#F7F5F2', beige: '#E8E3DA' }
-            },
-            fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              serif: ['Playfair Display', 'serif'],
-            }
-          }
-        }
-      }
-    </script>
-    <style>.no-export { display: none !important; }</style>
-</head>
 <body class="antialiased" style="background-color: #FFFFFF;">
     <header class="bg-white shadow-sm">
   <nav class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
@@ -77,33 +29,4 @@
     </ul>
   </div>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const bar1 = document.getElementById('bar1');
-        const bar2 = document.getElementById('bar2');
-        const bar3 = document.getElementById('bar3');
-        let isOpen = false;
-
-        if(menuBtn && mobileMenu) {
-            menuBtn.addEventListener('click', () => {
-                isOpen = !isOpen;
-                if(isOpen) {
-                    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-                    bar1.classList.add('rotate-45', 'translate-y-2');
-                    bar2.classList.add('opacity-0');
-                    bar3.classList.add('-rotate-45', '-translate-y-2');
-                } else {
-                    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-                    bar1.classList.remove('rotate-45', 'translate-y-2');
-                    bar2.classList.remove('opacity-0');
-                    bar3.classList.remove('-rotate-45', '-translate-y-2');
-                }
-            });
-        }
-    });
-  </script>
-</header>
-</body>
-</html>
-
+   
