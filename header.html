@@ -1,31 +1,53 @@
-<header class="bg-white shadow-sm">
-  <nav class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-    <a href="index.html" class="text-2xl font-light tracking-[2px] text-[#3D3D3D]">SÛO</a>
-    <ul class="hidden md:flex items-center space-x-10">
-      <li><a href="https://suobarefoot.es/calzado.html" class="nav-link">Calzado</a></li>
-      <li><a href="https://suobarefoot.es#barefoot" class="nav-link">Barefoot</a></li>
-      <li><a href="https://suobarefoot.es/quienes-somos.html" class="nav-link">Quienes somos</a></li>
-      <li><a href="https://suobarefoot.es/blog.html" class="nav-link">Blog</a></li>
-      <li><a href="https://suobarefoot.es/tienda.html" class="nav-link">Tienda</a></li>
-    </ul>
-    <div class="md:hidden">
-      <button id="menuBtn" class="space-y-1.5 z-50 relative" aria-label="Toggle menu">
-        <span id="bar1" class="block w-6 h-0.5 bg-[#3D3D3D] transition-transform duration-300"></span>
-        <span id="bar2" class="block w-6 h-0.5 bg-[#3D3D3D] transition-opacity duration-300"></span>
-        <span id="bar3" class="block w-6 h-0.5 bg-[#3D3D3D] transition-transform duration-300"></span>
-      </button>
-    </div>
-  </nav>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SÛO Header</title>
+    <meta name="description" content="Header component export">
+    <link rel="canonical" href="https://suobarefoot.es/index.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="SÛO Header">
+    <meta property="og:description" content="Header component export">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516961642278-5d95892393ae?q=80&w=1200">
 
-  <div id="mobileMenu" class="fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-white/95 backdrop-blur-lg md:hidden transition-opacity duration-300 opacity-0 pointer-events-none">
-    <ul class="flex flex-col items-center justify-center h-full space-y-8">
-      <li><a href="https://suobarefoot.es/calzado.html" class="movile-link">Calzado</a></li>
-      <li><a href="https://suobarefoot.es#barefoot" class="movile-link">Barefoot</a></li>
-      <li><a href="https://suobarefoot.es/quienes-somos.html" class="movile-link">Quienes somos</a></li>
-      <li><a href="https://suobarefoot.es/blog.html" class="movile-link">Blog</a></li>
-      <li><a href="https://suobarefoot.es/tienda.html" class="movile-link">Tienda</a></li>
-    </ul>
-  </div>
-</header>
-
-
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SÛO Barcelona",
+  "url": "https://suobarefoot.es/index.html",
+  "logo": "https://cdn-icons-png.flaticon.com/512/2749/2749676.png",
+  "description": "Header component export"
+}
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              suo: { dark: '#3D3D3D', green: '#8B9A7A', greenDark: '#6d7a5e', bg: '#F7F5F2', beige: '#E8E3DA' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>.no-export { display: none !important; }</style>
+</head>
+<body class="antialiased" style="background-color: #FFFFFF;">
+    <header id="site-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm"><nav class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center"><a class="text-2xl font-light tracking-[3px] text-suo-dark hover:opacity-70 transition-opacity" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/">SÛO</a><ul class="hidden md:flex items-center space-x-10"><li><a class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/calzado">Calzado</a></li><li><a href="#barefoot" class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors cursor-pointer">Barefoot</a></li><li><a class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/quienes-somos">Quienes somos</a></li><li><a class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/blog">Blog</a></li><li><a class="text-sm uppercase tracking-widest text-gray-600 hover:text-suo-green transition-colors" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/tienda">Tienda</a></li></ul><div class="md:hidden z-50"><button class="space-y-1.5 focus:outline-none" aria-label="Toggle menu"><span class="block w-6 h-0.5 bg-suo-dark transition-transform duration-300 "></span><span class="block w-6 h-0.5 bg-suo-dark transition-opacity duration-300 "></span><span class="block w-6 h-0.5 bg-suo-dark transition-transform duration-300 "></span></button></div></nav><div class="fixed top-0 left-0 w-full h-screen bg-white transition-transform duration-300 ease-in-out transform -translate-y-full md:hidden pt-24 flex flex-col items-center z-40"><ul class="flex flex-col items-center space-y-8"><li><a class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/calzado">Calzado</a></li><li><a href="#barefoot" class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors">Barefoot</a></li><li><a class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/quienes-somos">Quienes somos</a></li><li><a class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/blog">Blog</a></li><li><a class="text-lg uppercase tracking-widest text-gray-800 hover:text-suo-green transition-colors" href="blob:https://5wamhf96qdrnaf1m3zpx0ui197cw2sn3d04xkzi6wa10bjsv9o-h839267052.scf.usercontent.goog/6b18ef7d-bdcc-465c-860e-be1daa0d128c#/tienda">Tienda</a></li></ul></div></header>
+</body>
+</html>
