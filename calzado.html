@@ -224,8 +224,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css" />
-    <script src="/script.js" defer></script>
     
     <script>
       tailwind.config = {
@@ -244,10 +242,18 @@
     </script>
     <style>.no-export { display: none !important; }</style>
 </head>
-<body class="antialiased" style="background-color: #F7F5F2;">
-    <div id="header"></div>
+<body class="antialiased" style="background-color: #FFFFFF;">
     <main>
-<button class="lg:hidden w-full py-3 bg-suo-dark text-white uppercase tracking-widest text-xs rounded no-export">Filtrar Productos</button><aside class="lg:w-64 flex-shrink-0 hidden lg:block">
+
+<section class="bg-suo-bg py-12 border-b border-gray-100 relative"><button class="no-export absolute top-6 right-6 bg-white hover:bg-gray-100 text-gray-600 px-4 py-2 text-xs uppercase tracking-widest rounded transition-all border border-gray-200">Exportar Catálogo</button>
+<div class="max-w-6xl mx-auto px-6 text-center">
+<h1 class="text-4xl font-light text-suo-dark mb-2 tracking-wide">Colección SÛO</h1>
+
+<p class="text-gray-600 font-light">Calzado respetuoso para caminar como la naturaleza manda.</p>
+</div>
+</section>
+
+<div id="products-content" class="max-w-6xl mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12"><button class="lg:hidden w-full py-3 bg-suo-dark text-white uppercase tracking-widest text-xs rounded no-export">Filtrar Productos</button><aside class="lg:w-64 flex-shrink-0 hidden lg:block">
 <div class="sticky top-24 space-y-8">
 <div>
 <h3 class="text-xs font-bold text-suo-dark uppercase tracking-wider mb-4">Buscar</h3>
@@ -547,8 +553,8 @@
 </div>
 </a></div>
 </div>
+</div>
 
     </main>
-    <div id="footer"></div>
 </body>
 </html>
