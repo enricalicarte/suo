@@ -1,3 +1,5 @@
+
+
 // --- Cargar header y footer dinámicamente ---
 function loadFragment(id, file) {
   return fetch(file)
@@ -7,21 +9,6 @@ function loadFragment(id, file) {
     })
     .catch(err => console.error(`Error al cargar ${file}:`, err));
 }
-
-// --- Iniciar cuando la página esté lista ---
-document.addEventListener("DOMContentLoaded", async () => {
-  // Espera a que se carguen header y footer antes de ejecutar el resto
-  await Promise.all([
-    loadFragment("header", "header.html"),
-    loadFragment("footer", "footer.html")
-  ]);
-
-  // Cuando todo está cargado, inicializa los scripts
-  initMenu();
-  initFAQ();
-  initNewsletter();
-});
-
 
 // --- 1️⃣ Menú móvil ---
 function initMenu() {
@@ -51,7 +38,6 @@ function initMenu() {
   });
 }
 
-
 // --- 2️⃣ Acordeón de FAQ ---
 function initFAQ() {
   const faqQuestions = document.querySelectorAll(".faq-question");
@@ -68,7 +54,6 @@ function initFAQ() {
   });
 }
 
-
 // --- 3️⃣ Formulario de newsletter ---
 function initNewsletter() {
   const form = document.getElementById("newsletterForm");
@@ -80,4 +65,27 @@ function initNewsletter() {
     alert(`¡Gracias por suscribirte! Te enviaremos novedades a ${email}`);
     document.getElementById("newsletterEmail").value = "";
   });
+}
+
+// --- Función de inicialización ---
+async function initAll() {
+  // Espera a que se carguen header y footer antes de ejecutar el resto
+  await Promise.all([
+    loadFragment("header", "header.html"),
+    loadFragment("footer", "footer.html")
+  ]);
+
+  // Cuando todo está cargado, inicializa los scripts
+  initMenu();
+  initFAQ();
+  initNewsletter();
+}
+
+// --- Iniciar cuando la página esté lista ---
+// Como el script se carga con defer, verificamos si el DOM ya está listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAll);
+} else {
+  // El DOM ya está listo, ejecuta directamente
+  initAll();
 }
