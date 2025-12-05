@@ -1,4 +1,3 @@
-
 // --- Cargar header y footer dinámicamente ---
 function loadFragment(id, file) {
   return fetch(file)
@@ -12,30 +11,40 @@ function loadFragment(id, file) {
 
 // --- 1️⃣ Menú móvil ---
 function initMenu() {
-  const menuBtn = document.getElementById("menuBtn");
-  const mobileMenu = document.getElementById("mobileMenu");
-  const bar1 = document.getElementById("bar1");
-  const bar2 = document.getElementById("bar2");
-  const bar3 = document.getElementById("bar3");
-  const mobileLinks = document.querySelectorAll(".mobile-link");
+  const mobileMenuBtn = document.querySelector('button[aria-label="Toggle menu"]');
+  const mobileMenuOverlay = document.querySelector('.fixed.top-0.left-0.w-full.h-screen');
+  
+  if (mobileMenuBtn && mobileMenuOverlay) {
+    mobileMenuBtn.addEventListener('click', () => {
+      // Check if hidden by checking transform class
+      const isClosed = mobileMenuOverlay.classList.contains('-translate-y-full');
+      const spans = mobileMenuBtn.querySelectorAll('span');
 
-  if (!menuBtn || !mobileMenu || !bar1 || !bar2 || !bar3) return;
+      if (isClosed) {
+        // Open
+        mobileMenuOverlay.classList.remove('-translate-y-full');
+        mobileMenuOverlay.classList.add('translate-y-0');
+        
+        // Animate Hamburger to X
+        if(spans.length === 3) {
+          spans[0].classList.add('rotate-45', 'translate-y-2');
+          spans[1].classList.add('opacity-0');
+          spans[2].classList.add('-rotate-45', '-translate-y-2');
+        }
+      } else {
+        // Close
+        mobileMenuOverlay.classList.remove('translate-y-0');
+        mobileMenuOverlay.classList.add('-translate-y-full');
 
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("menu-open");
-    bar1.classList.toggle("rotate-45");
-    bar2.classList.toggle("opacity-0");
-    bar3.classList.toggle("-rotate-45");
-  });
-
-  mobileLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.remove("menu-open");
-      bar1.classList.remove("rotate-45");
-      bar2.classList.remove("opacity-0");
-      bar3.classList.remove("-rotate-45");
+        // Animate X back to Hamburger
+        if(spans.length === 3) {
+          spans[0].classList.remove('rotate-45', 'translate-y-2');
+          spans[1].classList.remove('opacity-0');
+          spans[2].classList.remove('-rotate-45', '-translate-y-2');
+        }
+      }
     });
-  });
+  }
 }
 
 // --- 2️⃣ Acordeón de FAQ ---
@@ -76,191 +85,182 @@ function initNewsletter() {
 
 // --- 4️⃣ Filtros del catálogo de calzado ---
 function initCatalogFilters() {
-  const productsContainer = document.getElementById("products-content");
-  if (!productsContainer) return; // no estamos en calzado.html
+  const productCards = document.querySelectorAll('.product-card');
+  
+  // Only run if we are on the products page
+  if (productCards.length === 0) return;
 
-  const searchInput = document.getElementById("static-search");
-  const categoryButtons = document.querySelectorAll(".static-category-btn");
-  const priceRange = document.getElementById("static-price");
-  const priceValue = document.getElementById("static-price-value");
-  const sizeButtons = document.querySelectorAll(".static-size-btn");
-  const resetButton = document.getElementById("static-reset");
-  const mobileFilterToggle = document.getElementById("static-mobile-filter-toggle");
-  const sidebar = document.getElementById("static-sidebar");
-  const productCards = document.querySelectorAll(".product-card");
+  const searchInput = document.getElementById('static-search');
+  const categoryBtns = document.querySelectorAll('.static-category-btn');
+  const priceInput = document.getElementById('static-price');
+  const priceDisplay = document.getElementById('static-price-value');
+  const sizeBtns = document.querySelectorAll('.static-size-btn');
+  const resetBtn = document.getElementById('static-reset');
+  
+  const mobileFilterToggle = document.getElementById('static-mobile-filter-toggle');
+  const sidebar = document.getElementById('static-sidebar');
 
+  // State to track current filters
   let state = {
-    search: "",
-    category: "all",
-    maxPrice: priceRange ? parseFloat(priceRange.value) : Infinity,
+    search: '',
+    category: null,
+    price: 200,
     size: null
   };
 
-  function applyFilters() {
+  // Helper to toggle visibility
+  function filterProducts() {
     productCards.forEach(card => {
-      const name = (card.dataset.name || "").toLowerCase();
-      const brand = (card.dataset.brand || "").toLowerCase();
-      const category = card.dataset.category || "";
-      const price = parseFloat(card.dataset.price || "0");
-      const sizes = (card.dataset.sizes || "").split(",").map(s => s.trim());
+      const name = (card.dataset.name || '').toLowerCase();
+      const brand = (card.dataset.brand || '').toLowerCase();
+      const pCategory = card.dataset.category;
+      const pPrice = parseFloat(card.dataset.price);
+      // Sizes stored as "36,37,38" string
+      const pSizes = card.dataset.sizes ? card.dataset.sizes.split(',').map(Number) : [];
 
-      const matchesSearch =
-        !state.search ||
-        name.includes(state.search) ||
-        brand.includes(state.search);
+      const term = state.search.toLowerCase();
+      const matchesSearch = name.includes(term) || brand.includes(term);
+      const matchesCategory = state.category ? pCategory === state.category : true;
+      const matchesPrice = pPrice <= state.price;
+      const matchesSize = state.size ? pSizes.includes(state.size) : true;
 
-      const matchesCategory =
-        state.category === "all" || category === state.category;
-
-      const matchesPrice = price <= state.maxPrice;
-
-      const matchesSize =
-        !state.size || sizes.includes(String(state.size));
-
-      const visible =
-        matchesSearch && matchesCategory && matchesPrice && matchesSize;
-
-      card.classList.toggle("hidden", !visible);
-    });
-  }
-
-  // 🔍 Buscar
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      state.search = e.target.value.toLowerCase();
-      applyFilters();
-    });
-  }
-
-  // 🏷 Categoría
-  categoryButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const category = btn.dataset.category;
-      state.category = category || "all";
-
-      categoryButtons.forEach(b => b.classList.remove("font-bold", "text-suo-green"));
-      btn.classList.add("font-bold", "text-suo-green");
-
-      applyFilters();
-    });
-  });
-
-  // 💶 Precio máximo
-  if (priceRange && priceValue) {
-    const updatePriceLabel = () => {
-      const val = parseFloat(priceRange.value);
-      state.maxPrice = val;
-      priceValue.textContent = `${val} €`;
-      applyFilters();
-    };
-    priceRange.addEventListener("input", updatePriceLabel);
-    updatePriceLabel();
-  }
-
-  // 👟 Talla
-  sizeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const size = btn.dataset.size;
-
-      if (state.size === size) {
-        state.size = null;
+      if (matchesSearch && matchesCategory && matchesPrice && matchesSize) {
+        card.style.display = 'block';
       } else {
-        state.size = size;
+        card.style.display = 'none';
       }
+    });
+  }
 
-      sizeButtons.forEach(b => {
-        b.classList.remove("bg-suo-green", "text-white", "border-suo-green");
-        b.classList.add("border-gray-200", "text-gray-600");
+  // Search Listener
+  if(searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      state.search = e.target.value;
+      filterProducts();
+    });
+  }
+
+  // Category Listeners
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.category;
+      state.category = cat === 'all' ? null : cat;
+
+      // Visual Update
+      categoryBtns.forEach(b => {
+        b.classList.remove('font-bold', 'text-suo-green');
       });
+      btn.classList.add('font-bold', 'text-suo-green');
 
-      if (state.size) {
-        btn.classList.add("bg-suo-green", "text-white", "border-suo-green");
-        btn.classList.remove("border-gray-200", "text-gray-600");
-      }
-
-      applyFilters();
+      filterProducts();
     });
   });
 
-  // 🔄 Reset
-  if (resetButton) {
-    resetButton.addEventListener("click", () => {
-      state = {
-        search: "",
-        category: "all",
-        maxPrice: priceRange ? parseFloat(priceRange.max) : Infinity,
-        size: null
-      };
+  // Price Listener
+  if(priceInput) {
+    priceInput.addEventListener('input', (e) => {
+      state.price = parseFloat(e.target.value);
+      if(priceDisplay) priceDisplay.textContent = state.price + ' €';
+      filterProducts();
+    });
+  }
 
-      if (searchInput) searchInput.value = "";
-      if (priceRange && priceValue) {
-        priceRange.value = priceRange.max;
-        priceValue.textContent = `${priceRange.max} €`;
+  // Size Listeners
+  sizeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const s = parseInt(btn.dataset.size);
+      
+      if (state.size === s) {
+        // Toggle Off
+        state.size = null;
+        btn.classList.remove('bg-suo-green', 'text-white', 'border-suo-green');
+        btn.classList.add('border-gray-200', 'text-gray-600');
+      } else {
+        // Select
+        state.size = s;
+        // Reset others
+        sizeBtns.forEach(b => {
+          b.classList.remove('bg-suo-green', 'text-white', 'border-suo-green');
+          b.classList.add('border-gray-200', 'text-gray-600');
+        });
+        // Highlight active
+        btn.classList.remove('border-gray-200', 'text-gray-600');
+        btn.classList.add('bg-suo-green', 'text-white', 'border-suo-green');
       }
+      filterProducts();
+    });
+  });
 
-      categoryButtons.forEach(b => b.classList.remove("font-bold", "text-suo-green"));
-      categoryButtons.forEach(b => {
-        if (b.dataset.category === "all") {
-          b.classList.add("font-bold", "text-suo-green");
-        }
+  // Reset Listener
+  if(resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      // Reset State
+      state = { search: '', category: null, price: 200, size: null };
+      
+      // Reset Inputs UI
+      if(searchInput) searchInput.value = '';
+      if(priceInput) priceInput.value = 200;
+      if(priceDisplay) priceDisplay.textContent = '200 €';
+
+      // Reset Categories UI
+      categoryBtns.forEach(b => b.classList.remove('font-bold', 'text-suo-green'));
+      const allBtn = document.querySelector('.static-category-btn[data-category="all"]');
+      if(allBtn) allBtn.classList.add('font-bold', 'text-suo-green');
+
+      // Reset Sizes UI
+      sizeBtns.forEach(b => {
+        b.classList.remove('bg-suo-green', 'text-white', 'border-suo-green');
+        b.classList.add('border-gray-200', 'text-gray-600');
       });
 
-      sizeButtons.forEach(b => {
-        b.classList.remove("bg-suo-green", "text-white", "border-suo-green");
-        b.classList.add("border-gray-200", "text-gray-600");
-      });
-
-      applyFilters();
+      filterProducts();
     });
   }
 
-  // 📱 Toggle filtros en móvil
+  // Mobile Sidebar Toggle
   if (mobileFilterToggle && sidebar) {
-    mobileFilterToggle.addEventListener("click", () => {
-      sidebar.classList.toggle("hidden");
+    mobileFilterToggle.addEventListener('click', () => {
+      if (sidebar.classList.contains('hidden')) {
+        sidebar.classList.remove('hidden');
+        mobileFilterToggle.textContent = 'Cerrar Filtros';
+      } else {
+        sidebar.classList.add('hidden');
+        mobileFilterToggle.textContent = 'Filtrar Productos';
+      }
     });
   }
-
-  applyFilters();
 }
 
 // --- 5️⃣ Filtros del blog ---
 function initBlogFilters() {
-  const filterButtons = document.querySelectorAll(".blog-filter-btn");
-  const posts = document.querySelectorAll(".blog-post-card");
+  const blogCards = document.querySelectorAll('.blog-post-card');
+  if (blogCards.length === 0) return;
 
-  if (!filterButtons.length || !posts.length) return; // no estamos en blog.html
+  const blogFilterBtns = document.querySelectorAll('.blog-filter-btn');
 
-  let currentFilter = "all";
+  blogFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
 
-  function applyBlogFilter() {
-    posts.forEach(post => {
-      const category = post.dataset.category || "";
-      const visible =
-        currentFilter === "all" || category === currentFilter;
-
-      post.classList.toggle("hidden", !visible);
-    });
-  }
-
-  filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const filter = btn.dataset.filter || "all";
-      currentFilter = filter;
-
-      filterButtons.forEach(b => {
-        b.classList.remove("bg-suo-green", "text-white");
-        b.classList.add("bg-white", "text-suo-dark");
+      // Update Buttons UI
+      blogFilterBtns.forEach(b => {
+        b.classList.remove('bg-suo-green', 'text-white');
+        b.classList.add('bg-white', 'text-suo-dark');
       });
+      btn.classList.remove('bg-white', 'text-suo-dark');
+      btn.classList.add('bg-suo-green', 'text-white');
 
-      btn.classList.remove("bg-white", "text-suo-dark");
-      btn.classList.add("bg-suo-green", "text-white");
-
-      applyBlogFilter();
+      // Filter Logic
+      blogCards.forEach(card => {
+        const category = card.dataset.category;
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'block'; 
+        } else {
+          card.style.display = 'none';
+        }
+      });
     });
   });
-
-  applyBlogFilter();
 }
 
 // --- Función de inicialización ---
