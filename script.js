@@ -1,3 +1,4 @@
+
 // --- Cargar header y footer dinámicamente ---
 function loadFragment(id, file) {
   return fetch(file)
