@@ -71,8 +71,8 @@ function initNewsletter() {
 async function initAll() {
   // Espera a que se carguen header y footer antes de ejecutar el resto
   await Promise.all([
-    loadFragment("header", "header.html"),
-    loadFragment("footer", "footer.html")
+    loadFragment("header", "/header.html"),
+    loadFragment("footer", "/footer.html")
   ]);
 
   // Cuando todo está cargado, inicializa los scripts
@@ -89,4 +89,5 @@ if (document.readyState === 'loading') {
   // El DOM ya está listo, ejecuta directamente
   initAll();
 }
+
 
