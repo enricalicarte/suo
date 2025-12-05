@@ -25,34 +25,32 @@ function initMenu() {
     mobileMenu.style.zIndex = '100';
     
     mobileMenuBtn.addEventListener('click', () => {
-      const isClosed = mobileMenu.classList.contains('opacity-0');
+      const isOpen = mobileMenu.classList.contains('menu-open');
       const bar1 = document.getElementById('bar1');
       const bar2 = document.getElementById('bar2');
       const bar3 = document.getElementById('bar3');
 
-      if (isClosed) {
+      if (!isOpen) {
         // Abrir menú
-        mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-        mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+        mobileMenu.classList.add('menu-open');
         document.body.style.overflow = 'hidden'; // Prevenir scroll
         
         // Animar hamburguesa a X
         if (bar1 && bar2 && bar3) {
-          bar1.classList.add('rotate-45', 'translate-y-2');
+          bar1.classList.add('rotate-45');
           bar2.classList.add('opacity-0');
-          bar3.classList.add('-rotate-45', '-translate-y-2');
+          bar3.classList.add('-rotate-45');
         }
       } else {
         // Cerrar menú
-        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        mobileMenu.classList.remove('menu-open');
         document.body.style.overflow = ''; // Restaurar scroll
         
         // Animar X de vuelta a hamburguesa
         if (bar1 && bar2 && bar3) {
-          bar1.classList.remove('rotate-45', 'translate-y-2');
+          bar1.classList.remove('rotate-45');
           bar2.classList.remove('opacity-0');
-          bar3.classList.remove('-rotate-45', '-translate-y-2');
+          bar3.classList.remove('-rotate-45');
         }
       }
     });
@@ -61,8 +59,7 @@ function initMenu() {
     const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
     mobileLinks.forEach(link => {
       link.addEventListener('click', () => {
-        mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
-        mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        mobileMenu.classList.remove('menu-open');
         document.body.style.overflow = '';
         
         const bar1 = document.getElementById('bar1');
@@ -70,9 +67,9 @@ function initMenu() {
         const bar3 = document.getElementById('bar3');
         
         if (bar1 && bar2 && bar3) {
-          bar1.classList.remove('rotate-45', 'translate-y-2');
+          bar1.classList.remove('rotate-45');
           bar2.classList.remove('opacity-0');
-          bar3.classList.remove('-rotate-45', '-translate-y-2');
+          bar3.classList.remove('-rotate-45');
         }
       });
     });
@@ -80,7 +77,6 @@ function initMenu() {
     console.log('Error: No se encontró el menú o el botón');
   }
 }
-
 // --- 2️⃣ Acordeón de FAQ ---
 function initFAQ() {
   const faqQuestions = document.querySelectorAll(".faq-question");
@@ -317,5 +313,6 @@ if (document.readyState === "loading") {
 } else {
   initAll();
 }
+
 
 
