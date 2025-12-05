@@ -8,15 +8,23 @@ function loadFragment(id, file) {
     })
     .catch(err => console.error(`Error al cargar ${file}:`, err));
 }
-
 // --- 1️⃣ Menú móvil ---
 function initMenu() {
   const mobileMenuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
+  let mobileMenu = document.getElementById('mobileMenu');
   
   if (mobileMenuBtn && mobileMenu) {
+    // MOVER el menú móvil fuera del header para evitar conflictos de z-index
+    if (mobileMenu.parentElement.tagName === 'HEADER' || 
+        mobileMenu.closest('header')) {
+      document.body.appendChild(mobileMenu);
+      console.log('Menú móvil movido fuera del header');
+    }
+    
+    // Asegurar que tiene el z-index correcto
+    mobileMenu.style.zIndex = '100';
+    
     mobileMenuBtn.addEventListener('click', () => {
-      // Verificar si el menú está cerrado
       const isClosed = mobileMenu.classList.contains('opacity-0');
       const bar1 = document.getElementById('bar1');
       const bar2 = document.getElementById('bar2');
@@ -26,6 +34,7 @@ function initMenu() {
         // Abrir menú
         mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
         mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+        document.body.style.overflow = 'hidden'; // Prevenir scroll
         
         // Animar hamburguesa a X
         if (bar1 && bar2 && bar3) {
@@ -37,7 +46,8 @@ function initMenu() {
         // Cerrar menú
         mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
         mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-
+        document.body.style.overflow = ''; // Restaurar scroll
+        
         // Animar X de vuelta a hamburguesa
         if (bar1 && bar2 && bar3) {
           bar1.classList.remove('rotate-45', 'translate-y-2');
@@ -53,6 +63,7 @@ function initMenu() {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
         mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = '';
         
         const bar1 = document.getElementById('bar1');
         const bar2 = document.getElementById('bar2');
@@ -65,6 +76,8 @@ function initMenu() {
         }
       });
     });
+  } else {
+    console.log('Error: No se encontró el menú o el botón');
   }
 }
 
@@ -304,4 +317,5 @@ if (document.readyState === "loading") {
 } else {
   initAll();
 }
+
 
